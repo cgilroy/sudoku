@@ -50,11 +50,27 @@ class Board
     end
 
     def solved?
+        return true if row_sum_correct? && col_sum_correct?
+        false
+    end
 
+    def row_sum_correct?
+        @grid.each_with_index do |row,row_idx|
+            row_sum = row.inject(0){|sum,x| sum + x.value.to_i }
+            return false if row_sum != 45
+        end
+        true
+    end
+
+    def col_sum_correct?
+        (0..8).each do |col|
+            col_sum = 0
+            (0..8).each do |row|
+                col_sum += @grid[row][col].value.to_i
+            end
+            return false if col_sum != 45
+        end
+        true
     end
 
 end
-
-x = Board.from_file('./puzzles/sudoku1.txt')
-y = Board.new(x)
-y.render
