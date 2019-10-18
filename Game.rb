@@ -22,6 +22,9 @@ class Game
                 @board.update_tile_val(input)
             end
         end
+        system('clear')
+        @board.render
+        puts "You win!"
     end
 
     def prompt
